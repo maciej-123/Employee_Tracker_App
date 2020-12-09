@@ -136,7 +136,7 @@ public class Interface {
     private void addBranchesList()
     {
         branchesList = new JPanel();
-        branchesList.setLayout(new GridLayout(4,1,10,10));
+        branchesList.setLayout(new GridLayout(5,1,10,10));
         branchesTitle = new JLabel("Drug List and Branches");//create title
         branchesList.add(branchesTitle);
 
