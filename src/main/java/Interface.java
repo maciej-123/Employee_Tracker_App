@@ -185,7 +185,7 @@ public class Interface {
         Location.setEditable(false);
         Location.setBackground(Color.LIGHT_GRAY);
         searchForDrug.add(Location);
-
+        //
         functionsPanel.add(searchForDrug);//add to functions panel
     }
 
