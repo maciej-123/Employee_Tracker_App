@@ -145,8 +145,6 @@ public class Interface {
     {
         Profit = new JPanel();
         Profit.setLayout(new GridLayout(7,1,10,0));
-        soldItem = new JLabel("Input Sold Item");//create title
-        Profit.add(soldItem);
 
 
         profitCostTitle = new JLabel("Find Daily Profit"); //create title
