@@ -9,13 +9,17 @@ public class Interface {
     //main panel with 2 extra panels
     private JPanel mainPanel;
     private JPanel functionsPanel;
-    private JPanel titlePanel;
+    private JPanel topPanel;
     //sub-labels for title and warning panel
     private JLabel title;
     //sub-panels for function panel
-    private JPanel salesRevenueProfit;
     private JPanel branchesList; //%%% may possibly be removed
     private JPanel searchForDrug;
+    private JPanel Sales;
+
+    //panels for profit in profit tab
+    private JPanel profitPanel;
+    private JPanel Profit;
 
     //Sales and Revenue function panel elements:
     private JLabel soldItem;
@@ -44,12 +48,16 @@ public class Interface {
     private JLabel locationTitle;
     private JTextField Location;
 
+    //test tabbed pane
+    private JTabbedPane Screen;
+
     //main constructor for interface
     Interface()
     {
         // ** make variables private outside of constructor - delete me later
 
         //declare panels
+
 
 
         mainPanel = new JPanel();
@@ -64,14 +72,14 @@ public class Interface {
 
         c.fill = GridBagConstraints.VERTICAL;
 
-        titlePanel = new JPanel();
-        titlePanel.setPreferredSize(new Dimension(1024, 100));
+        topPanel = new JPanel();
+        topPanel.setLayout(new GridLayout(1,2,25,2));
 
         c.fill = GridBagConstraints.VERTICAL;
-        c.weighty = 1;
+        c.weighty = 0.5;
         c.gridx = 0;
         c.gridy = 0;
-        mainPanel.add(titlePanel, c);
+        mainPanel.add(topPanel, c);
 
         functionsPanel = new JPanel();
         functionsPanel.setLayout(new GridLayout(1,3,10,10));
@@ -83,13 +91,27 @@ public class Interface {
         c.gridy = 1;
         mainPanel.add(functionsPanel, c);
 
+        profitPanel = new JPanel();
+        profitPanel.setLayout(new GridLayout(1,3,10,10));
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weighty = 8;
+        c.gridx = 0;
+        c.gridy = 1;
+
+        Screen = new JTabbedPane();
+        Screen.addTab("Main Screen", mainPanel);
+        Screen.addTab("Check Profit",profitPanel);
+
         //add and create title and warning for app
         addTitle();
 
         //Create and add panel containing functions for inputting sold items and calculating revenue and profit
-        addSalesRevProf();
-        addBranchesList();
+        addBranchButtons();
         addSearchForDrug();
+        addSales();
+        addDrugList();
+        addProf();
+
 
 
         //add all panels to main panel:
@@ -101,54 +123,68 @@ public class Interface {
     {
         title = new JLabel("PHAB Pharmacy Stock Tracker");//create title
         title.setForeground(Color.BLUE);//set font colour
-        title.setFont(title.getFont().deriveFont(40.0f));//set font size
-        titlePanel.add(title);
+        title.setFont(title.getFont().deriveFont(30.0f));//set font size
+        topPanel.add(title);
 
     }
 
-    private void addSalesRevProf()
+    private void addBranchButtons()
     {
-        salesRevenueProfit = new JPanel();
-        salesRevenueProfit.setLayout(new GridLayout(7,1,10,0));
-        soldItem = new JLabel("Input Sold Item");//create title
-        salesRevenueProfit.add(soldItem);
-        inputSoldItem = new JTextField("Input Item Here");
-        salesRevenueProfit.add(inputSoldItem);
-        enterItem = new JButton("Enter Item");
-        salesRevenueProfit.add(enterItem);
-
-        profitCostTitle = new JLabel("Find Daily Profit and Costs"); //create title
-        salesRevenueProfit.add(profitCostTitle);
-        revenue = new JTextField("%%Display Revenue Here");
-        revenue.setEditable(false);
-        revenue.setBackground(Color.LIGHT_GRAY);
-        salesRevenueProfit.add(revenue);
-        dailyProfit = new JTextField("%%Display Daily Profit Here");
-        dailyProfit.setEditable(false);
-        dailyProfit.setBackground(Color.LIGHT_GRAY);
-        salesRevenueProfit.add(dailyProfit);
-        calculateProfit = new JButton("Calculate Profit");
-        salesRevenueProfit.add(calculateProfit);
-
-        functionsPanel.add(salesRevenueProfit);//add to functions panel
-    }
-
-    private void addBranchesList()
-    {
-        branchesList = new JPanel();
-        branchesList.setLayout(new GridLayout(5,1,10,10));
-        branchesTitle = new JLabel("Drug List and Branches");//create title
-        branchesList.add(branchesTitle);
-
         branches = new JPanel();
-        branches.setLayout(new GridLayout(1,3,10,10));
+        branches.setLayout(new GridLayout(1,3,3,0));
         greenPark = new JButton("Green Park");
         branches.add(greenPark);
         mileEnd = new JButton("Mile End");
         branches.add(mileEnd);
         Paddington = new JButton("Paddington");
         branches.add(Paddington);
-        branchesList.add(branches);
+        topPanel.add(branches);
+    }
+
+    private void addProf()
+    {
+        Profit = new JPanel();
+        Profit.setLayout(new GridLayout(7,1,10,0));
+        soldItem = new JLabel("Input Sold Item");//create title
+        Profit.add(soldItem);
+
+
+        profitCostTitle = new JLabel("Find Daily Profit"); //create title
+        Profit.add(profitCostTitle);
+        revenue = new JTextField("%%Display Revenue Here");
+        revenue.setEditable(false);
+        revenue.setBackground(Color.LIGHT_GRAY);
+        Profit.add(revenue);
+        dailyProfit = new JTextField("%%Display Daily Profit Here");
+        dailyProfit.setEditable(false);
+        dailyProfit.setBackground(Color.LIGHT_GRAY);
+        Profit.add(dailyProfit);
+        calculateProfit = new JButton("Calculate Profit");
+        Profit.add(calculateProfit);
+
+        profitPanel.add(Profit);
+    }
+
+    private void addSales(){
+        Sales = new JPanel();
+        Sales.setLayout(new GridLayout(7,1,10,10));
+        soldItem = new JLabel("Input Sold Item");//create title
+        Sales.add(soldItem);
+        inputSoldItem = new JTextField("Input Item Here");
+        Sales.add(inputSoldItem);
+        enterItem = new JButton("Enter Item");
+        Sales.add(enterItem);
+
+        functionsPanel.add(Sales);
+
+    }
+
+    private void addDrugList()
+    {
+        branchesList = new JPanel();
+        branchesList.setLayout(new GridLayout(7,1,10,0));
+        branchesTitle = new JLabel("Drug List");//create title
+        branchesList.add(branchesTitle);
 
         drugList = new JTextArea("%%Drug list will display here");
         drugList.setEditable(false);
@@ -189,8 +225,8 @@ public class Interface {
         functionsPanel.add(searchForDrug);//add to functions panel
     }
 
-    public JPanel returnMainPanel()
+    public JTabbedPane returnScreen()
     {
-        return mainPanel;
+        return Screen;
     }
 }
