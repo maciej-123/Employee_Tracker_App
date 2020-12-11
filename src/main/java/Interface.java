@@ -208,10 +208,11 @@ public class Interface {
         String[] drugSearch=new String[]{"Vicks","Vicks","Gsk","Gsk"};
         final JComboBox search_drug=new JComboBox(drugSearch);
         search_drug.setEditable(false); // idk if it should be editable
+        AutoCompletion.enable(search_drug);
         searchForDrug.add(search_drug);
 
         // searchForDrug.add(drugName);
-        searchButton = new JButton("Search");
+        searchButton = new JButton("Select Item");
         searchForDrug.add(searchButton);
         itemDetails = new JLabel("Item Details:");//create title
         searchForDrug.add(itemDetails);
