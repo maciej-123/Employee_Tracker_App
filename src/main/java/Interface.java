@@ -47,6 +47,7 @@ public class Interface {
     private JTextField drugDetails;
     private JLabel locationTitle;
     private JTextField Location;
+    private JTextField itemQuantity;
 
     //test tabbed pane
     private JTabbedPane Screen;
@@ -93,10 +94,7 @@ public class Interface {
 
         profitPanel = new JPanel();
         profitPanel.setLayout(new GridLayout(1,3,10,10));
-        c.fill = GridBagConstraints.VERTICAL;
-        c.weighty = 8;
-        c.gridx = 0;
-        c.gridy = 1;
+
 
         Screen = new JTabbedPane();
         Screen.addTab("Main Screen", mainPanel);
@@ -170,6 +168,8 @@ public class Interface {
         Sales.add(soldItem);
         inputSoldItem = new JTextField("Input Item Here");
         Sales.add(inputSoldItem);
+        itemQuantity = new JTextField("Input Item Quantity");
+        Sales.add(itemQuantity);
         enterItem = new JButton("Enter Item");
         Sales.add(enterItem);
 
