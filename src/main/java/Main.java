@@ -10,7 +10,7 @@ public class Main {
         f.setSize(1024,600);
         //declare instance of interface to add to panel
         Interface i = new Interface();
-        f.add(i.returnMainPanel());
+        f.add(i.returnScreen());
 
 
 
