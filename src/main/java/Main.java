@@ -12,9 +12,6 @@ public class Main {
         Interface i = new Interface();
         f.add(i.returnScreen());
 
-
-
-
         f.setVisible(true);// This next line closes the program when the frame is close
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }

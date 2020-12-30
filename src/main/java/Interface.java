@@ -142,7 +142,7 @@ public class Interface {
     private void addProf()
     {
         Profit = new JPanel();
-        Profit.setLayout(new GridLayout(7,1,10,0));
+        Profit.setLayout(new GridLayout(8,1,10,0));
 
 
         profitCostTitle = new JLabel("Find Daily Profit"); //create title
@@ -163,11 +163,22 @@ public class Interface {
 
     private void addSales(){
         Sales = new JPanel();
-        Sales.setLayout(new GridLayout(7,1,10,10));
+        Sales.setLayout(new GridLayout(8,1,10,10));
         soldItem = new JLabel("Input Sold Item");//create title
         Sales.add(soldItem);
-        inputSoldItem = new JTextField("Input Item Here");
-        Sales.add(inputSoldItem);
+
+        String[] soldItemManu=new String[]{"Vicks","Gsk"};
+        final JComboBox sold_ItemManu=new JComboBox(soldItemManu);
+        sold_ItemManu.setEditable(false); // idk if it should be editable
+        AutoCompletion.enable(sold_ItemManu);
+        Sales.add(sold_ItemManu);
+
+        String[] soldItemName=new String[]{"Vaporub","First defence","Gsk","Gsk"};
+        final JComboBox sold_ItemName=new JComboBox(soldItemName);
+        sold_ItemName.setEditable(false); // idk if it should be editable
+        AutoCompletion.enable(sold_ItemName);
+        Sales.add(sold_ItemName);
+
         itemQuantity = new JTextField("Input Item Quantity");
         Sales.add(itemQuantity);
         enterItem = new JButton("Enter Item");
@@ -180,7 +191,7 @@ public class Interface {
     private void addDrugList()
     {
         branchesList = new JPanel();
-        branchesList.setLayout(new GridLayout(7,1,10,0));
+        branchesList.setLayout(new GridLayout(8,1,10,0));
         branchesTitle = new JLabel("Drug List");//create title
         branchesList.add(branchesTitle);
 
@@ -200,16 +211,22 @@ public class Interface {
     private void addSearchForDrug()
     {
         searchForDrug = new JPanel();
-        searchForDrug.setLayout(new GridLayout(7,1,10,10));
+        searchForDrug.setLayout(new GridLayout(8,1,10,10));
         searchTitle = new JLabel("Search for Drug");//create title
         searchForDrug.add(searchTitle);
         // drugName = new JTextField("Enter Drug Name");
 
-        String[] drugSearch=new String[]{"Vicks","Vicks","Gsk","Gsk"};
+        String[] drugSearch=new String[]{"Vicks","Gsk"};
         final JComboBox search_drug=new JComboBox(drugSearch);
         search_drug.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(search_drug);
         searchForDrug.add(search_drug);
+
+        String[] drugnameSearch=new String[]{"Vaporub","First defence","Gsk","Gsk"};
+        final JComboBox search_drugname=new JComboBox(drugnameSearch);
+        search_drugname.setEditable(false); // idk if it should be editable
+        AutoCompletion.enable(search_drugname);
+        searchForDrug.add(search_drugname);
 
         // searchForDrug.add(drugName);
         searchButton = new JButton("Select Item");
