@@ -38,6 +38,7 @@ public class Interface {
     private JButton Paddington;
     private JTextArea drugList;
     private JLabel warning; // the background of this text will turn red if the stock is depleted to below 20%
+    private JButton restock;
 
     //
     private JLabel searchTitle;
@@ -204,6 +205,9 @@ public class Interface {
         warning.setForeground(Color.RED);//set font colour
         warning.setFont(warning.getFont().deriveFont(24.0f));//set font size
         branchesList.add(warning);
+
+        restock = new JButton("Restock item(s)");
+        branchesList.add(restock);
 
         functionsPanel.add(branchesList);//add to functions panel
     }
