@@ -168,13 +168,33 @@ public class Interface {
         soldItem = new JLabel("Input Sold Item");//create title
         Sales.add(soldItem);
 
-        String[] soldItemManu=new String[]{"Vicks","Gsk"};
+        String[] soldItemManu=new String[]{"Vicks","Gsk","Lemsip","Sudafed","Benylin","E45","Eurax",
+                "Eucerin","Dermalex","Cetaphil","Nurofen","Suprofen","Solpadeine","Anadin","Disprin",
+                "Dioralyte","Gaviscon","Senokot","Benadryl","Piriteze","Beconase","Dettol",
+                "Elastoplast","TCP"};
         final JComboBox sold_ItemManu=new JComboBox(soldItemManu);
         sold_ItemManu.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(sold_ItemManu);
         Sales.add(sold_ItemManu);
 
-        String[] soldItemName=new String[]{"Vaporub","First defence","Gsk","Gsk"};
+        String[] soldItemName=new String[]{
+                // Cold and fllu
+                "Vaporub","First Defence","Night Nurse","Night Nurse","Max",
+                "Standard","Day and Night","Max","Mucus relief","4 flu",
+                //Skincare
+                "Psoriasis cream","Skin cream",
+                "Skin relief cream","Face scrub","Psoriasis cream","Repair and Restore","Eczema cream",
+                "Eczema cream","Moisturising cream","Exfoliating cleanser",
+                //Headaches and pain relief
+                "Meltlets","Express","Max strength",
+                "Standard","Max strength","Headache","Extra","Triple action","Original","Soluble",
+                //Digestion
+                "Blackcurrant","Lemon","Chewable","Max","Advance",
+                //Allergy
+                "Relief","tabs","Relief",
+                //First aid
+                "Antiseptic","Hand sanitizer","plasters","Liquid"
+        };
         final JComboBox sold_ItemName=new JComboBox(soldItemName);
         sold_ItemName.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(sold_ItemName);
@@ -196,7 +216,7 @@ public class Interface {
         branchesTitle = new JLabel("Drug List");//create title
         branchesList.add(branchesTitle);
 
-        drugList = new JTextArea("%%Drug list will display here");
+        drugList = new JTextArea("Cold and flu\nVicks, Vaporub\nVicks, First defence");
         drugList.setEditable(false);
         drugList.setBackground(Color.LIGHT_GRAY);
         branchesList.add(drugList);
@@ -220,13 +240,34 @@ public class Interface {
         searchForDrug.add(searchTitle);
         // drugName = new JTextField("Enter Drug Name");
 
-        String[] drugSearch=new String[]{"Vicks","Gsk"};
+        String[] drugSearch=new String[]{"Vicks","Gsk","Lemsip","Sudafed","Benylin","E45","Eurax",
+                "Eucerin","Dermalex","Cetaphil","Nurofen","Suprofen","Solpadeine","Anadin","Disprin",
+                "Dioralyte","Gaviscon","Senokot","Benadryl","Piriteze","Beconase","Dettol",
+                "Elastoplast","TCP"};
         final JComboBox search_drug=new JComboBox(drugSearch);
         search_drug.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(search_drug);
         searchForDrug.add(search_drug);
 
-        String[] drugnameSearch=new String[]{"Vaporub","First defence","Gsk","Gsk"};
+        String[] drugnameSearch=new String[]{
+                // Cold and fllu
+                "Vaporub","First Defence","Night Nurse","Night Nurse","Max",
+                "Standard","Day and Night","Max","Mucus relief","4 flu",
+                //Skincare
+                "Psoriasis cream","Skin cream",
+                "Skin relief cream","Face scrub","Psoriasis cream","Repair and Restore","Eczema cream",
+                "Eczema cream","Moisturising cream","Exfoliating cleanser",
+                //Headaches and pain relief
+                "Meltlets","Express","Max strength",
+                "Standard","Max strength","Headache","Extra","Triple action","Original","Soluble",
+                //Digestion
+                "Blackcurrant","Lemon","Chewable","Max","Advance",
+                //Allergy
+                "Relief","tabs","Relief",
+                //First aid
+                "Antiseptic","Hand sanitizer","plasters","Liquid"
+        };
+
         final JComboBox search_drugname=new JComboBox(drugnameSearch);
         search_drugname.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(search_drugname);
