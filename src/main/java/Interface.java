@@ -232,7 +232,7 @@ public class Interface {
         Sales.add(soldItem);
 
         String[] soldItemManu=new String[]{"Vicks","Gsk","Lemsip","Sudafed","Benylin","E45","Eurax",
-                "Eucerin","Dermalex","Cetaphil","Nurofen","Suprofen","Solpadeine","Anadin","Disprin",
+                "Eucerin","Dermalex","Cetaphil","Nurofen","Cuprofen","Solpadeine","Anadin","Disprin",
                 "Dioralyte","Gaviscon","Senokot","Benadryl","Piriteze","Beconase","Dettol",
                 "Elastoplast","TCP"};
         final JComboBox sold_ItemManu=new JComboBox(soldItemManu);
@@ -315,7 +315,7 @@ public class Interface {
         // drugName = new JTextField("Enter Drug Name");
 
         String[] drugSearch=new String[]{"Vicks","Gsk","Lemsip","Sudafed","Benylin","E45","Eurax",
-                "Eucerin","Dermalex","Cetaphil","Nurofen","Suprofen","Solpadeine","Anadin","Disprin",
+                "Eucerin","Dermalex","Cetaphil","Nurofen","Cuprofen","Solpadeine","Anadin","Disprin",
                 "Dioralyte","Gaviscon","Senokot","Benadryl","Piriteze","Beconase","Dettol",
                 "Elastoplast","TCP"};
         final JComboBox search_drug=new JComboBox(drugSearch);
