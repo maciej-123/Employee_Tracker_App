@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.border.*;
 
 
@@ -276,6 +278,16 @@ public class Interface {
         // searchForDrug.add(drugName);
         searchButton = new JButton("Select Item");
         searchForDrug.add(searchButton);
+        ActionListener searchButtonAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("searchButton pressed "+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
+
+            }
+        };
+        searchButton.addActionListener(searchButtonAL);
+
         itemDetails = new JLabel("Item Details:");//create title
         searchForDrug.add(itemDetails);
         drugDetails = new JTextField("%%Details will show here");
