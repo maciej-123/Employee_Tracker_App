@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
@@ -201,8 +203,10 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Profit calculated");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
-                String prof=calculateProfit.getActionCommand();
-                dailyProfit.setText(prof);
+                //String prof=calculateProfit.getActionCommand();
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                dailyProfit.setText(jsonString);
             }
         };
 
@@ -211,8 +215,11 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Revenue calculated"+e.getActionCommand());
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateRevenue");
-                String rev=calculateRevenue.getActionCommand();
-                revenue.setText(rev);
+                //String rev=calculateRevenue.getActionCommand();
+
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                revenue.setText(jsonString);
             }
         };
 
