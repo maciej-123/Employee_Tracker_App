@@ -159,6 +159,17 @@ public class Interface {
         dailyProfit.setBackground(Color.LIGHT_GRAY);
         Profit.add(dailyProfit);
         calculateProfit = new JButton("Calculate Profit");
+
+        ActionListener profitAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Profit calculated"+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
+            }
+        };
+
+        calculateProfit.addActionListener(profitAL);
+
         Profit.add(calculateProfit);
 
         profitPanel.add(Profit);
@@ -229,6 +240,17 @@ public class Interface {
         branchesList.add(warning);
 
         restock = new JButton("Restock item(s)");
+
+        ActionListener restockAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Restock button pressed"+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/replenishStock");
+            }
+        };
+
+        restock.addActionListener(restockAL);
+
         branchesList.add(restock);
 
         functionsPanel.add(branchesList);//add to functions panel
