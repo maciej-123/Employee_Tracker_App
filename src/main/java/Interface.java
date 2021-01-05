@@ -131,13 +131,47 @@ public class Interface {
 
     private void addBranchButtons()
     {
+        String Branch1 = "Paddington";
+        String Branch2 = "MileEnd";
+        String Branch3 = "GreenPark";
         branches = new JPanel();
         branches.setLayout(new GridLayout(1,3,3,0));
         greenPark = new JButton("Green Park");
+
+        ActionListener greenParkAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Green Park selected"+e.getActionCommand());
+                POST_Requests P = new POST_Requests(Branch3,"https://phabservlet1.herokuapp.com/inputB");
+            }
+        };
+
+        greenPark.addActionListener(greenParkAL);
         branches.add(greenPark);
         mileEnd = new JButton("Mile End");
+
+        ActionListener mileEndAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Mile End selected"+e.getActionCommand());
+                POST_Requests P = new POST_Requests(Branch2,"https://phabservlet1.herokuapp.com/inputB");
+            }
+        };
+
+        mileEnd.addActionListener(mileEndAL);
+
         branches.add(mileEnd);
         Paddington = new JButton("Paddington");
+
+        ActionListener paddingtonAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Paddington selected"+e.getActionCommand());
+                POST_Requests P = new POST_Requests(Branch1,"https://phabservlet1.herokuapp.com/inputB");
+            }
+        };
+
+        Paddington.addActionListener(paddingtonAL);
         branches.add(Paddington);
         topPanel.add(branches);
     }
@@ -165,6 +199,12 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Profit calculated"+e.getActionCommand());
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
+                String prof=calculateProfit.getActionCommand();
+                dailyProfit.setText(prof);
+
+                GET_Requests g1 = new GET_Requests("https://phabservlet1.herokuapp.com/calculateRevenue");
+                String rev=calculateProfit.getActionCommand();
+                revenue.setText(rev);
             }
         };
 
