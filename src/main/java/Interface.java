@@ -31,6 +31,7 @@ public class Interface {
     private JTextField revenue;
     private JTextField dailyProfit;
     private JButton calculateProfit;
+    private JButton calculateRevenue;
 
     //Branches and Drug List panel elements:
     private JLabel branchesTitle;
@@ -193,24 +194,33 @@ public class Interface {
         dailyProfit.setBackground(Color.LIGHT_GRAY);
         Profit.add(dailyProfit);
         calculateProfit = new JButton("Calculate Profit");
+        calculateRevenue = new JButton("Calculate Revenue");
 
         ActionListener profitAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Profit calculated"+e.getActionCommand());
+                System.out.println("Profit calculated");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
                 String prof=calculateProfit.getActionCommand();
                 dailyProfit.setText(prof);
+            }
+        };
 
-                GET_Requests g1 = new GET_Requests("https://phabservlet1.herokuapp.com/calculateRevenue");
-                String rev=calculateProfit.getActionCommand();
+        ActionListener revAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Revenue calculated"+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateRevenue");
+                String rev=calculateRevenue.getActionCommand();
                 revenue.setText(rev);
             }
         };
 
         calculateProfit.addActionListener(profitAL);
+        calculateRevenue.addActionListener(revAL);
 
         Profit.add(calculateProfit);
+        Profit.add(calculateRevenue);
 
         profitPanel.add(Profit);
     }
