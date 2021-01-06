@@ -6,7 +6,7 @@ import java.net.URL;
 public class GET_Requests {
 
     private String inputLine;
-    private String returnString;
+    private String returnString="";
 
     GET_Requests(String Web_URL)
     {
