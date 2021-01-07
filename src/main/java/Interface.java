@@ -46,6 +46,7 @@ public class Interface {
     private JLabel warning; // the background of this text will turn red if the stock is depleted to below 20%
     private JButton restock;
     private JButton checkStock;
+    private JTextField stockStatus;
 
     //
     private JLabel searchTitle;
@@ -335,18 +336,28 @@ public class Interface {
         branchesList.add(restock);
 
         checkStock = new JButton("Check stock");
+        stockStatus = new JTextField("%%Stock status will show here");
+        stockStatus.setEditable(false);
+        stockStatus.setBackground(Color.LIGHT_GRAY);
+
+
 
         ActionListener checkStockAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("check button pressed"+e.getActionCommand());
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_checkStock");
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                stockStatus.setText(jsonString);
 
             }
         };
 
         checkStock.addActionListener(checkStockAL);
         branchesList.add(checkStock);
+        branchesList.add(stockStatus);
+
 
         functionsPanel.add(branchesList);//add to functions panel
     }
@@ -406,10 +417,11 @@ public class Interface {
                 POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
                 System.out.println("searchButton pressed ");
-
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(g);
-                drugDetails.setText(jsonString);
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(17,length2);
+                drugDetails.setText(jsonString2);
                 System.out.println(jsonString);
             }
         };
