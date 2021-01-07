@@ -355,7 +355,7 @@ public class Interface {
         AutoCompletion.enable(search_drugname);
         searchForDrug.add(search_drugname);
 
-        // searchForDrug.add(drugName);
+        // searchForDrug.add(drugName); test
         searchButton = new JButton("Select Item");
         searchForDrug.add(searchButton);
         ActionListener searchButtonAL=new ActionListener() {
