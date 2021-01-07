@@ -352,6 +352,9 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("check button pressed"+e.getActionCommand());
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_checkStock");
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                stockStatus.setText(jsonString);
 
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(g);
