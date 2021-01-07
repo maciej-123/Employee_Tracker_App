@@ -274,6 +274,22 @@ public class Interface {
         itemQuantity = new JTextField("Input Item Quantity");
         Sales.add(itemQuantity);
         enterItem = new JButton("Enter Item");
+
+        ActionListener soldItemAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String manu=sold_ItemManu.getSelectedItem().toString().toLowerCase();
+                String name=sold_ItemName.getSelectedItem().toString().toLowerCase();
+                String message2=manu+"@"+name;
+
+                POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
+                System.out.println("Stock Updated");
+            }
+        };
+        enterItem.addActionListener(soldItemAL);
+
         Sales.add(enterItem);
 
         functionsPanel.add(Sales);
@@ -368,7 +384,12 @@ public class Interface {
 
                 POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
-                System.out.println("searchButton pressed "+e.getActionCommand());
+                System.out.println("searchButton pressed ");
+
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                drugDetails.setText(jsonString);
+                System.out.println(jsonString);
             }
         };
         searchButton.addActionListener(searchButtonAL);
