@@ -206,7 +206,7 @@ public class Interface {
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
                 //String prof=calculateProfit.getActionCommand();
                 Gson gson = new Gson();
-                String jsonString = gson.toJson(g);
+                String jsonString = gson.toJson(g).substring(18);
                 dailyProfit.setText(jsonString);
             }
         };
@@ -219,7 +219,7 @@ public class Interface {
                 //String rev=calculateRevenue.getActionCommand();
 
                 Gson gson = new Gson();
-                String jsonString = gson.toJson(g);
+                String jsonString = gson.toJson(g).substring(18);
                 revenue.setText(jsonString);
             }
         };
@@ -278,13 +278,19 @@ public class Interface {
         ActionListener soldItemAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String quantity=itemQuantity.getText();
+                int int_quan=Integer.parseInt(quantity);
 
                 String manu=sold_ItemManu.getSelectedItem().toString().toLowerCase();
                 String name=sold_ItemName.getSelectedItem().toString().toLowerCase();
                 String message2=manu+"@"+name;
 
                 POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
-                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
+
+                for(int i=1;i<=int_quan;++i) {
+                    GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
+                }
+
                 System.out.println("Stock Updated");
             }
         };
