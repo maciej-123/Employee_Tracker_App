@@ -45,6 +45,7 @@ public class Interface {
     private JTextArea drugList;
     private JLabel warning; // the background of this text will turn red if the stock is depleted to below 20%
     private JButton restock;
+    private JButton checkStock;
 
     //
     private JLabel searchTitle;
@@ -332,6 +333,20 @@ public class Interface {
         restock.addActionListener(restockAL);
 
         branchesList.add(restock);
+
+        checkStock = new JButton("Check stock");
+
+        ActionListener checkStockAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("check button pressed"+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_checkStock");
+
+            }
+        };
+
+        checkStock.addActionListener(checkStockAL);
+        branchesList.add(checkStock);
 
         functionsPanel.add(branchesList);//add to functions panel
     }
