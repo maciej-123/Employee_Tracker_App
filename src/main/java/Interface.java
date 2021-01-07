@@ -361,9 +361,14 @@ public class Interface {
         ActionListener searchButtonAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("searchButton pressed "+e.getActionCommand());
-                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
 
+                String manu=search_drug.getSelectedItem().toString();
+                String name=search_drugname.getSelectedItem().toString();
+                String message2=manu+"@"+name;
+
+                POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
+                System.out.println("searchButton pressed "+e.getActionCommand());
             }
         };
         searchButton.addActionListener(searchButtonAL);
