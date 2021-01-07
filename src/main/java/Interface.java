@@ -362,8 +362,8 @@ public class Interface {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String manu=search_drug.getSelectedItem().toString();
-                String name=search_drugname.getSelectedItem().toString();
+                String manu=search_drug.getSelectedItem().toString().toLowerCase();
+                String name=search_drugname.getSelectedItem().toString().toLowerCase();
                 String message2=manu+"@"+name;
 
                 POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
