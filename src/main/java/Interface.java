@@ -354,10 +354,7 @@ public class Interface {
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_checkStock");
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(g);
-                stockStatus.setText(jsonString);
 
-                Gson gson = new Gson();
-                String jsonString = gson.toJson(g);
                 int length2=jsonString.length()-2;
                 String jsonString2 = jsonString.substring(17,length2);
                 stockStatus.setText(jsonString2);
