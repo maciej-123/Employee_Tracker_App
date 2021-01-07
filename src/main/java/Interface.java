@@ -46,6 +46,7 @@ public class Interface {
     private JLabel warning; // the background of this text will turn red if the stock is depleted to below 20%
     private JButton restock;
     private JButton checkStock;
+    private JTextField stockStatus;
 
     //
     private JLabel searchTitle;
@@ -206,9 +207,12 @@ public class Interface {
                 System.out.println("Profit calculated");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
                 //String prof=calculateProfit.getActionCommand();
+
                 Gson gson = new Gson();
-                String jsonString = gson.toJson(g).substring(18);
-                dailyProfit.setText(jsonString);
+                String jsonString = gson.toJson(g);
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(18,length2);
+                dailyProfit.setText(jsonString2);
             }
         };
 
@@ -220,8 +224,10 @@ public class Interface {
                 //String rev=calculateRevenue.getActionCommand();
 
                 Gson gson = new Gson();
-                String jsonString = gson.toJson(g).substring(18);
-                revenue.setText(jsonString);
+                String jsonString = gson.toJson(g);
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(18,length2);
+                revenue.setText(jsonString2);
             }
         };
 
@@ -335,6 +341,11 @@ public class Interface {
         branchesList.add(restock);
 
         checkStock = new JButton("Check stock");
+        stockStatus = new JTextField("%%Stock status will show here");
+        stockStatus.setEditable(false);
+        stockStatus.setBackground(Color.LIGHT_GRAY);
+
+
 
         ActionListener checkStockAL=new ActionListener() {
             @Override
@@ -342,11 +353,19 @@ public class Interface {
                 System.out.println("check button pressed"+e.getActionCommand());
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_checkStock");
 
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(17,length2);
+                stockStatus.setText(jsonString2);
+
             }
         };
 
         checkStock.addActionListener(checkStockAL);
         branchesList.add(checkStock);
+        branchesList.add(stockStatus);
+
 
         functionsPanel.add(branchesList);//add to functions panel
     }
@@ -406,10 +425,11 @@ public class Interface {
                 POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
                 System.out.println("searchButton pressed ");
-
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(g);
-                drugDetails.setText(jsonString);
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(17,length2);
+                drugDetails.setText(jsonString2);
                 System.out.println(jsonString);
             }
         };
