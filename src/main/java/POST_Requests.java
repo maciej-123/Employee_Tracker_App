@@ -48,9 +48,11 @@ public class POST_Requests {
 
 
             bufferedReader.close();
+            conn.disconnect();
 
+        }
 
-        }catch(Exception e)
+        catch(Exception e)
         {
             System.out.println("Exception thrown");
         }

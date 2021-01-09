@@ -46,7 +46,7 @@ public class Interface {
     private JLabel warning; // the background of this text will turn red if the stock is depleted to below 20%
     private JButton restock;
 
-    //
+
     private JLabel searchTitle;
     private JTextField drugName;
     private JButton searchButton;
@@ -56,7 +56,7 @@ public class Interface {
     private JTextField Location;
     private JTextField itemQuantity;
 
-    //test tabbed pane
+
     private JTabbedPane Screen;
 
     //main constructor for interface

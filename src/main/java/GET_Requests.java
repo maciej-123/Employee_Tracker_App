@@ -31,6 +31,7 @@ public class GET_Requests {
                 returnString += inputLine;
             }
             in.close();
+            conn.disconnect();
         }catch(Exception e)
         {
             System.out.println("Exception thrown");
