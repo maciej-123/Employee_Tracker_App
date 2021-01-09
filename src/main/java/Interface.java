@@ -63,6 +63,7 @@ public class Interface {
 
     //test warn label
     private JLabel testwarn;
+    private String selectedBranch;
 
     //main constructor for interface
     Interface()
@@ -152,6 +153,7 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Green Park selected"+e.getActionCommand());
                 POST_Requests P = new POST_Requests(Branch3,"https://phabservlet1.herokuapp.com/inputB");
+                selectedBranch = Branch3;
             }
         };
 
@@ -164,6 +166,7 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Mile End selected"+e.getActionCommand());
                 POST_Requests P = new POST_Requests(Branch2,"https://phabservlet1.herokuapp.com/inputB");
+                selectedBranch = Branch2;
             }
         };
 
@@ -177,6 +180,7 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Paddington selected"+e.getActionCommand());
                 POST_Requests P = new POST_Requests(Branch1,"https://phabservlet1.herokuapp.com/inputB");
+                selectedBranch = Branch1;
             }
         };
 
@@ -208,6 +212,7 @@ public class Interface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Profit calculated");
+                POST_Requests P = new POST_Requests(selectedBranch,"https://phabservlet1.herokuapp.com/inputB");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
                 //String prof=calculateProfit.getActionCommand();
 
@@ -223,6 +228,7 @@ public class Interface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Revenue calculated"+e.getActionCommand());
+                POST_Requests P = new POST_Requests(selectedBranch,"https://phabservlet1.herokuapp.com/inputB");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateRevenue");
                 //String rev=calculateRevenue.getActionCommand();
 
