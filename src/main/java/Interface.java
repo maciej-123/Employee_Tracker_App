@@ -45,6 +45,8 @@ public class Interface {
     private JTextArea drugList;
     private JLabel warning; // the background of this text will turn red if the stock is depleted to below 20%
     private JButton restock;
+    private JButton checkStock;
+    private JTextField stockStatus;
 
 
     private JLabel searchTitle;
@@ -58,6 +60,9 @@ public class Interface {
 
 
     private JTabbedPane Screen;
+
+    //test warn label
+    private JLabel testwarn;
 
     //main constructor for interface
     Interface()
@@ -205,9 +210,12 @@ public class Interface {
                 System.out.println("Profit calculated");
                 GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
                 //String prof=calculateProfit.getActionCommand();
+
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(g);
-                dailyProfit.setText(jsonString);
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(18,length2);
+                dailyProfit.setText(jsonString2);
             }
         };
 
@@ -220,7 +228,9 @@ public class Interface {
 
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(g);
-                revenue.setText(jsonString);
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(18,length2);
+                revenue.setText(jsonString2);
             }
         };
 
@@ -274,6 +284,47 @@ public class Interface {
         itemQuantity = new JTextField("Input Item Quantity");
         Sales.add(itemQuantity);
         enterItem = new JButton("Enter Item");
+        JLabel testwarning = new JLabel();
+
+        ActionListener soldItemAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String quantity = itemQuantity.getText();
+                int int_quan = Integer.parseInt(quantity);
+
+                String manu = sold_ItemManu.getSelectedItem().toString().toLowerCase();
+                String name = sold_ItemName.getSelectedItem().toString().toLowerCase();
+                String message2 = manu + "@" + name;
+
+                POST_Requests p2 = new POST_Requests(message2, "https://phabservlet1.herokuapp.com/inputMN");
+                GET_Requests g3 = new GET_Requests("https://phabservlet1.herokuapp.com/getLimitOne");
+                int int_g3 = Integer.valueOf(g3.returnText());
+
+                // if more than 1 of a limitOne item is chosen - error
+                if(int_g3==1&&int_quan!=1){
+                    testwarning.setText("INPUT QUANTITY EXCEEDS MAXIMUM");
+                    testwarning.setForeground(Color.RED);
+                    System.out.println("Error");
+                }
+
+                // else decrease stock by quantity input
+                else {
+                    GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
+                    for (int i = 0; i < int_quan; i++) {
+                        POST_Requests p3 = new POST_Requests(message2, "https://phabservlet1.herokuapp.com/inputMN");
+                        G.makeGetRequest("https://phabservlet1.herokuapp.com/_decreaseStock");
+                        System.out.println("Stock Updated");
+                        testwarning.setText("Item updated");
+                        testwarning.setForeground(Color.GREEN);
+                    }
+                }
+                Sales.add(testwarning);
+
+            }
+        };
+
+        enterItem.addActionListener(soldItemAL);
+
         Sales.add(enterItem);
 
         functionsPanel.add(Sales);
@@ -310,6 +361,33 @@ public class Interface {
         restock.addActionListener(restockAL);
 
         branchesList.add(restock);
+
+        checkStock = new JButton("Check stock");
+        stockStatus = new JTextField("%%Stock status will show here");
+        stockStatus.setEditable(false);
+        stockStatus.setBackground(Color.LIGHT_GRAY);
+
+
+
+        ActionListener checkStockAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("check button pressed"+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_checkStock");
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(17,length2);
+                stockStatus.setText(jsonString2);
+
+            }
+        };
+
+        checkStock.addActionListener(checkStockAL);
+        branchesList.add(checkStock);
+        branchesList.add(stockStatus);
+
 
         functionsPanel.add(branchesList);//add to functions panel
     }
@@ -355,15 +433,26 @@ public class Interface {
         AutoCompletion.enable(search_drugname);
         searchForDrug.add(search_drugname);
 
-        // searchForDrug.add(drugName);
+        // searchForDrug.add(drugName); test
         searchButton = new JButton("Select Item");
         searchForDrug.add(searchButton);
         ActionListener searchButtonAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("searchButton pressed "+e.getActionCommand());
-                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
 
+                String manu=search_drug.getSelectedItem().toString().toLowerCase();
+                String name=search_drugname.getSelectedItem().toString().toLowerCase();
+                String message2=manu+"@"+name;
+
+                POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
+                System.out.println("searchButton pressed ");
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                int length2=jsonString.length()-2;
+                String jsonString2 = jsonString.substring(17,length2);
+                drugDetails.setText(jsonString2);
+                System.out.println(jsonString);
             }
         };
         searchButton.addActionListener(searchButtonAL);
@@ -374,12 +463,6 @@ public class Interface {
         drugDetails.setEditable(false);
         drugDetails.setBackground(Color.LIGHT_GRAY);
         searchForDrug.add(drugDetails);
-        locationTitle = new JLabel("Location");//create title
-        searchForDrug.add(locationTitle);
-        Location = new JTextField("%%Location will display here");
-        Location.setEditable(false);
-        Location.setBackground(Color.LIGHT_GRAY);
-        searchForDrug.add(Location);
 
         functionsPanel.add(searchForDrug);//add to functions panel
     }
