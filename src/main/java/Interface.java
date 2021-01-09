@@ -61,6 +61,9 @@ public class Interface {
     //test tabbed pane
     private JTabbedPane Screen;
 
+    //test warn label
+    private JLabel testwarn;
+
     //main constructor for interface
     Interface()
     {
@@ -281,28 +284,45 @@ public class Interface {
         itemQuantity = new JTextField("Input Item Quantity");
         Sales.add(itemQuantity);
         enterItem = new JButton("Enter Item");
+        JLabel testwarning = new JLabel();
 
         ActionListener soldItemAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String quantity=itemQuantity.getText();
-                int int_quan=Integer.parseInt(quantity);
+                String quantity = itemQuantity.getText();
+                int int_quan = Integer.parseInt(quantity);
 
-                String manu=sold_ItemManu.getSelectedItem().toString().toLowerCase();
-                String name=sold_ItemName.getSelectedItem().toString().toLowerCase();
-                String message2=manu+"@"+name;
+                String manu = sold_ItemManu.getSelectedItem().toString().toLowerCase();
+                String name = sold_ItemName.getSelectedItem().toString().toLowerCase();
+                String message2 = manu + "@" + name;
 
+                POST_Requests p2 = new POST_Requests(message2, "https://phabservlet1.herokuapp.com/inputMN");
+                GET_Requests g3 = new GET_Requests("https://phabservlet1.herokuapp.com/getLimitOne");
+                int int_g3 = Integer.valueOf(g3.returnText());
 
-                GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
-                for(int i = 0; i < int_quan; i++)
-                {
-                    POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
-                    G.makeGetRequest("https://phabservlet1.herokuapp.com/_decreaseStock");
+                // if more than 1 of a limitOne item is chosen - error
+                if(int_g3==1&&int_quan!=1){
+                    testwarning.setText("INPUT QUANTITY EXCEEDS MAXIMUM");
+                    testwarning.setForeground(Color.RED);
+                    System.out.println("Error");
                 }
 
-                System.out.println("Stock Updated");
+                // else decrease stock by quantity input
+                else {
+                    GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
+                    for (int i = 0; i < int_quan; i++) {
+                        POST_Requests p3 = new POST_Requests(message2, "https://phabservlet1.herokuapp.com/inputMN");
+                        G.makeGetRequest("https://phabservlet1.herokuapp.com/_decreaseStock");
+                        System.out.println("Stock Updated");
+                        testwarning.setText("Item updated");
+                        testwarning.setForeground(Color.GREEN);
+                    }
+                }
+                Sales.add(testwarning);
+
             }
         };
+
         enterItem.addActionListener(soldItemAL);
 
         Sales.add(enterItem);
