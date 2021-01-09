@@ -463,12 +463,6 @@ public class Interface {
         drugDetails.setEditable(false);
         drugDetails.setBackground(Color.LIGHT_GRAY);
         searchForDrug.add(drugDetails);
-        locationTitle = new JLabel("Location");//create title
-        searchForDrug.add(locationTitle);
-        Location = new JTextField("%%Location will display here");
-        Location.setEditable(false);
-        Location.setBackground(Color.LIGHT_GRAY);
-        searchForDrug.add(Location);
 
         functionsPanel.add(searchForDrug);//add to functions panel
     }
