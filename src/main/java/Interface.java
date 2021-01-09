@@ -345,7 +345,27 @@ public class Interface {
         branchesList.setLayout(new GridLayout(8,1,10,0));
         branchesTitle = new JLabel("Drug List");//create title
         branchesList.add(branchesTitle);
-        String list[] = {"A","B","C","D","E","F"};
+        String list[] = {
+                // Colds and flu
+                "Vicks Vaporub","Vicks First Defence","Gsk Night Nurse","Gsk Night Nurse",
+                "Lemsip Max","Lemsip Standard","Sudafed Day and Night","Sudafed Max","Benylin Mucus relief",
+                "Benylin 4 flu",
+                // Skincare
+                "E45 Psoriasis cream","Eurax Skin cream","Eucerin Skin relief cream","Eucerin Face scrub",
+                "Dermalex Psoriasis cream","Dermalex Repair and Restore","Dermalex Eczema cream",
+                "Dermalex Eczema cream","Cetaphil Moisturising cream","Cetaphil Exfoliating cleanser",
+                // Headaches and pain relief
+                "Nurofen Meltlets","Nurofen Express","Nurofen Max strength","Nurofen Standard",
+                "Cuprofen Max strength","Solpadeine Headache","Anadin Extra","Anadin Triple action",
+                "Anadin Original","Disprin Soluble",
+                // Digestion
+                "Dioralyte Blackcurrant","Dioralyte Lemon","Gaviscon Chewable","Senokot Max","Gaviscon Advance",
+                // Allergies
+                "Benadryl Relief","Piriteze tabs","Beconase Relief",
+                // First aid
+                "Dettol	Antiseptic","Dettol Hand sanitizer","Elastoplast plasters","TCP Liquid"};
+
+
 
         drugList = new JList(list);
         scrollableList = new JScrollPane(drugList);
