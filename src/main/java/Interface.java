@@ -1,6 +1,11 @@
+import com.google.gson.Gson;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Map;
 import javax.swing.border.*;
 
 
@@ -29,6 +34,7 @@ public class Interface {
     private JTextField revenue;
     private JTextField dailyProfit;
     private JButton calculateProfit;
+    private JButton calculateRevenue;
 
     //Branches and Drug List panel elements:
     private JLabel branchesTitle;
@@ -38,6 +44,7 @@ public class Interface {
     private JButton Paddington;
     private JTextArea drugList;
     private JLabel warning; // the background of this text will turn red if the stock is depleted to below 20%
+    private JButton restock;
 
     //
     private JLabel searchTitle;
@@ -128,13 +135,47 @@ public class Interface {
 
     private void addBranchButtons()
     {
+        String Branch1 = "Paddington";
+        String Branch2 = "MileEnd";
+        String Branch3 = "GreenPark";
         branches = new JPanel();
         branches.setLayout(new GridLayout(1,3,3,0));
         greenPark = new JButton("Green Park");
+
+        ActionListener greenParkAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Green Park selected"+e.getActionCommand());
+                POST_Requests P = new POST_Requests(Branch3,"https://phabservlet1.herokuapp.com/inputB");
+            }
+        };
+
+        greenPark.addActionListener(greenParkAL);
         branches.add(greenPark);
         mileEnd = new JButton("Mile End");
+
+        ActionListener mileEndAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Mile End selected"+e.getActionCommand());
+                POST_Requests P = new POST_Requests(Branch2,"https://phabservlet1.herokuapp.com/inputB");
+            }
+        };
+
+        mileEnd.addActionListener(mileEndAL);
+
         branches.add(mileEnd);
         Paddington = new JButton("Paddington");
+
+        ActionListener paddingtonAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Paddington selected"+e.getActionCommand());
+                POST_Requests P = new POST_Requests(Branch1,"https://phabservlet1.herokuapp.com/inputB");
+            }
+        };
+
+        Paddington.addActionListener(paddingtonAL);
         branches.add(Paddington);
         topPanel.add(branches);
     }
@@ -142,7 +183,7 @@ public class Interface {
     private void addProf()
     {
         Profit = new JPanel();
-        Profit.setLayout(new GridLayout(7,1,10,0));
+        Profit.setLayout(new GridLayout(8,1,10,0));
 
 
         profitCostTitle = new JLabel("Find Daily Profit"); //create title
@@ -156,18 +197,80 @@ public class Interface {
         dailyProfit.setBackground(Color.LIGHT_GRAY);
         Profit.add(dailyProfit);
         calculateProfit = new JButton("Calculate Profit");
+        calculateRevenue = new JButton("Calculate Revenue");
+
+        ActionListener profitAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Profit calculated");
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateProfit");
+                //String prof=calculateProfit.getActionCommand();
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                dailyProfit.setText(jsonString);
+            }
+        };
+
+        ActionListener revAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Revenue calculated"+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/calculateRevenue");
+                //String rev=calculateRevenue.getActionCommand();
+
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(g);
+                revenue.setText(jsonString);
+            }
+        };
+
+        calculateProfit.addActionListener(profitAL);
+        calculateRevenue.addActionListener(revAL);
+
         Profit.add(calculateProfit);
+        Profit.add(calculateRevenue);
 
         profitPanel.add(Profit);
     }
 
     private void addSales(){
         Sales = new JPanel();
-        Sales.setLayout(new GridLayout(7,1,10,10));
+        Sales.setLayout(new GridLayout(8,1,10,10));
         soldItem = new JLabel("Input Sold Item");//create title
         Sales.add(soldItem);
-        inputSoldItem = new JTextField("Input Item Here");
-        Sales.add(inputSoldItem);
+
+        String[] soldItemManu=new String[]{"Vicks","Gsk","Lemsip","Sudafed","Benylin","E45","Eurax",
+                "Eucerin","Dermalex","Cetaphil","Nurofen","Cuprofen","Solpadeine","Anadin","Disprin",
+                "Dioralyte","Gaviscon","Senokot","Benadryl","Piriteze","Beconase","Dettol",
+                "Elastoplast","TCP"};
+        final JComboBox sold_ItemManu=new JComboBox(soldItemManu);
+        sold_ItemManu.setEditable(false); // idk if it should be editable
+        AutoCompletion.enable(sold_ItemManu);
+        Sales.add(sold_ItemManu);
+
+        String[] soldItemName=new String[]{
+                // Cold and fllu
+                "Vaporub","First Defence","Night Nurse","Night Nurse","Max",
+                "Standard","Day and Night","Max","Mucus relief","4 flu",
+                //Skincare
+                "Psoriasis cream","Skin cream",
+                "Skin relief cream","Face scrub","Psoriasis cream","Repair and Restore","Eczema cream",
+                "Eczema cream","Moisturising cream","Exfoliating cleanser",
+                //Headaches and pain relief
+                "Meltlets","Express","Max strength",
+                "Standard","Max strength","Headache","Extra","Triple action","Original","Soluble",
+                //Digestion
+                "Blackcurrant","Lemon","Chewable","Max","Advance",
+                //Allergy
+                "Relief","tabs","Relief",
+                //First aid
+                "Antiseptic","Hand sanitizer","plasters","Liquid"
+        };
+        final JComboBox sold_ItemName=new JComboBox(soldItemName);
+        sold_ItemName.setEditable(false); // idk if it should be editable
+        AutoCompletion.enable(sold_ItemName);
+        Sales.add(sold_ItemName);
+
         itemQuantity = new JTextField("Input Item Quantity");
         Sales.add(itemQuantity);
         enterItem = new JButton("Enter Item");
@@ -180,11 +283,11 @@ public class Interface {
     private void addDrugList()
     {
         branchesList = new JPanel();
-        branchesList.setLayout(new GridLayout(7,1,10,0));
+        branchesList.setLayout(new GridLayout(8,1,10,0));
         branchesTitle = new JLabel("Drug List");//create title
         branchesList.add(branchesTitle);
 
-        drugList = new JTextArea("%%Drug list will display here");
+        drugList = new JTextArea("Cold and flu\nVicks, Vaporub\nVicks, First defence");
         drugList.setEditable(false);
         drugList.setBackground(Color.LIGHT_GRAY);
         branchesList.add(drugList);
@@ -194,26 +297,77 @@ public class Interface {
         warning.setFont(warning.getFont().deriveFont(24.0f));//set font size
         branchesList.add(warning);
 
+        restock = new JButton("Restock item(s)");
+
+        ActionListener restockAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Restock button pressed"+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/replenishStock");
+            }
+        };
+
+        restock.addActionListener(restockAL);
+
+        branchesList.add(restock);
+
         functionsPanel.add(branchesList);//add to functions panel
     }
 
     private void addSearchForDrug()
     {
         searchForDrug = new JPanel();
-        searchForDrug.setLayout(new GridLayout(7,1,10,10));
+        searchForDrug.setLayout(new GridLayout(8,1,10,10));
         searchTitle = new JLabel("Search for Drug");//create title
         searchForDrug.add(searchTitle);
         // drugName = new JTextField("Enter Drug Name");
 
-        String[] drugSearch=new String[]{"Vicks","Vicks","Gsk","Gsk"};
+        String[] drugSearch=new String[]{"Vicks","Gsk","Lemsip","Sudafed","Benylin","E45","Eurax",
+                "Eucerin","Dermalex","Cetaphil","Nurofen","Cuprofen","Solpadeine","Anadin","Disprin",
+                "Dioralyte","Gaviscon","Senokot","Benadryl","Piriteze","Beconase","Dettol",
+                "Elastoplast","TCP"};
         final JComboBox search_drug=new JComboBox(drugSearch);
         search_drug.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(search_drug);
         searchForDrug.add(search_drug);
 
+        String[] drugnameSearch=new String[]{
+                // Cold and fllu
+                "Vaporub","First Defence","Night Nurse","Night Nurse","Max",
+                "Standard","Day and Night","Max","Mucus relief","4 flu",
+                //Skincare
+                "Psoriasis cream","Skin cream",
+                "Skin relief cream","Face scrub","Psoriasis cream","Repair and Restore","Eczema cream",
+                "Eczema cream","Moisturising cream","Exfoliating cleanser",
+                //Headaches and pain relief
+                "Meltlets","Express","Max strength",
+                "Standard","Max strength","Headache","Extra","Triple action","Original","Soluble",
+                //Digestion
+                "Blackcurrant","Lemon","Chewable","Max","Advance",
+                //Allergy
+                "Relief","tabs","Relief",
+                //First aid
+                "Antiseptic","Hand sanitizer","plasters","Liquid"
+        };
+
+        final JComboBox search_drugname=new JComboBox(drugnameSearch);
+        search_drugname.setEditable(false); // idk if it should be editable
+        AutoCompletion.enable(search_drugname);
+        searchForDrug.add(search_drugname);
+
         // searchForDrug.add(drugName);
         searchButton = new JButton("Select Item");
         searchForDrug.add(searchButton);
+        ActionListener searchButtonAL=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("searchButton pressed "+e.getActionCommand());
+                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/searchForDrug");
+
+            }
+        };
+        searchButton.addActionListener(searchButtonAL);
+
         itemDetails = new JLabel("Item Details:");//create title
         searchForDrug.add(itemDetails);
         drugDetails = new JTextField("%%Details will show here");
