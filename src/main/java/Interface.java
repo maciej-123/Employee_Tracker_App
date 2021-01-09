@@ -42,11 +42,13 @@ public class Interface {
     private JButton greenPark;
     private JButton mileEnd;
     private JButton Paddington;
-    private JTextArea drugList;
+    private JList drugList;
+    private JScrollPane scrollableList;
     private JLabel warning; // the background of this text will turn red if the stock is depleted to below 20%
     private JButton restock;
     private JButton checkStock;
     private JTextField stockStatus;
+
 
 
     private JLabel searchTitle;
@@ -343,11 +345,14 @@ public class Interface {
         branchesList.setLayout(new GridLayout(8,1,10,0));
         branchesTitle = new JLabel("Drug List");//create title
         branchesList.add(branchesTitle);
+        String list[] = {"A","B","C","D","E","F"};
 
-        drugList = new JTextArea("Cold and flu\nVicks, Vaporub\nVicks, First defence");
-        drugList.setEditable(false);
-        drugList.setBackground(Color.LIGHT_GRAY);
-        branchesList.add(drugList);
+        drugList = new JList(list);
+        scrollableList = new JScrollPane(drugList);
+
+
+
+        branchesList.add(scrollableList);
 
         warning = new JLabel("RED Warning Below 20%");//create warning
         warning.setForeground(Color.RED);//set font colour
