@@ -292,12 +292,11 @@ public class Interface {
                 String name=sold_ItemName.getSelectedItem().toString().toLowerCase();
                 String message2=manu+"@"+name;
 
-                POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
 
                 GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
                 for(int i = 0; i < int_quan; i++)
                 {
-
+                    POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
                     G.makeGetRequest("https://phabservlet1.herokuapp.com/_decreaseStock");
                 }
 
