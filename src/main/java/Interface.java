@@ -294,8 +294,11 @@ public class Interface {
 
                 POST_Requests p2 = new POST_Requests(message2,"https://phabservlet1.herokuapp.com/inputMN");
 
-                for(int i=1;i<=int_quan;++i) {
-                    GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
+                GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
+                for(int i = 0; i < int_quan; i++)
+                {
+
+                    G.makeGetRequest("https://phabservlet1.herokuapp.com/_decreaseStock");
                 }
 
                 System.out.println("Stock Updated");
