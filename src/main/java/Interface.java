@@ -374,10 +374,6 @@ public class Interface {
 
         branchesList.add(scrollableList);
 
-        warning = new JLabel("RED Warning Below 20%");//create warning
-        warning.setForeground(Color.RED);//set font colour
-        warning.setFont(warning.getFont().deriveFont(24.0f));//set font size
-        branchesList.add(warning);
 
         restock = new JButton("Restock item(s)");
 
@@ -410,7 +406,7 @@ public class Interface {
 
                 int length2=jsonString.length()-2;
                 String jsonString2 = jsonString.substring(17,length2);
-                stockStatus.setText(jsonString2);
+                stockStatus.setText(g.returnText());
 
             }
         };
@@ -419,6 +415,10 @@ public class Interface {
         branchesList.add(checkStock);
         branchesList.add(stockStatus);
 
+        warning = new JLabel("RED Warning Below 20%");//create warning
+        warning.setForeground(Color.RED);//set font colour
+        warning.setFont(warning.getFont().deriveFont(24.0f));//set font size
+        branchesList.add(warning);
 
         functionsPanel.add(branchesList);//add to functions panel
     }
@@ -483,14 +483,23 @@ public class Interface {
                 int length2=jsonString.length()-2;
                 String jsonString2 = jsonString.substring(17,length2);
 
-                drugDetails.setText(g.returnText());
-                System.out.println(jsonString);
+                String detailsGet = g.returnText();
+                String[] split_details = detailsGet.split("\\s+");
+                String displayedDetails = split_details[0]+" "+split_details[1]+" "+split_details[2]+", "+
+                        "Selling price: "+split_details[3]+" pounds, Purchase Price: "+split_details[4]+" pounds, "+
+                        "Full stock: "+split_details[5]+", Current stock: "+split_details[7];
+                //
+                // drugDetails.setText(g.returnText());
+                // System.out.println(jsonString);
+                drugDetails.setText(displayedDetails);
             }
         };
         searchButton.addActionListener(searchButtonAL);
 
         itemDetails = new JLabel("Item Details:");//create title
         searchForDrug.add(itemDetails);
+
+
         drugDetails = new JTextField("%%Details will show here");
         drugDetails.setEditable(false);
         drugDetails.setBackground(Color.LIGHT_GRAY);
