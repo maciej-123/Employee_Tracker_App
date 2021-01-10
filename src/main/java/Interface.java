@@ -482,7 +482,8 @@ public class Interface {
                 String jsonString = gson.toJson(g);
                 int length2=jsonString.length()-2;
                 String jsonString2 = jsonString.substring(17,length2);
-                drugDetails.setText(jsonString2);
+
+                drugDetails.setText(g.returnText());
                 System.out.println(jsonString);
             }
         };
