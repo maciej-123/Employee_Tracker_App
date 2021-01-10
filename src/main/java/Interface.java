@@ -415,7 +415,7 @@ public class Interface {
         branchesList.add(checkStock);
         branchesList.add(stockStatus);
 
-        warning = new JLabel("RED Warning Below 20%");//create warning
+        warning = new JLabel("Please regularly check stock status");//create warning
         warning.setForeground(Color.RED);//set font colour
         warning.setFont(warning.getFont().deriveFont(24.0f));//set font size
         branchesList.add(warning);
