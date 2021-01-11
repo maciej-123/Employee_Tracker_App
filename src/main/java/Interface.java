@@ -149,6 +149,7 @@ public class Interface {
         branches = new JPanel();
         branches.setLayout(new GridLayout(1,3,3,0));
         greenPark = new JButton("Green Park");
+        greenPark.setBackground(Color.decode("#ee0000"));
 
         ActionListener greenParkAL=new ActionListener() {
             @Override
@@ -162,6 +163,7 @@ public class Interface {
         greenPark.addActionListener(greenParkAL);
         branches.add(greenPark);
         mileEnd = new JButton("Mile End");
+        mileEnd.setBackground(Color.decode("#ee0000"));
 
         ActionListener mileEndAL=new ActionListener() {
             @Override
@@ -176,6 +178,7 @@ public class Interface {
 
         branches.add(mileEnd);
         Paddington = new JButton("Paddington");
+        Paddington.setBackground(Color.decode("#ee0000"));
 
         ActionListener paddingtonAL=new ActionListener() {
             @Override
@@ -208,7 +211,9 @@ public class Interface {
         dailyProfit.setBackground(Color.LIGHT_GRAY);
         Profit.add(dailyProfit);
         calculateProfit = new JButton("Calculate Profit");
+        calculateProfit.setBackground(Color.decode("#ade0dd"));
         calculateRevenue = new JButton("Calculate Revenue");
+        calculateRevenue.setBackground(Color.decode("#ade0dd"));
 
         ActionListener profitAL=new ActionListener() {
             @Override
@@ -332,7 +337,10 @@ public class Interface {
                 }
                 Sales.add(testwarning);
 
+
+
             }
+
         };
 
         enterItem.addActionListener(soldItemAL);
@@ -340,6 +348,12 @@ public class Interface {
         Sales.add(enterItem);
 
         functionsPanel.add(Sales);
+
+
+        JLabel info = new JLabel("Please Select Branch Before Use");//create warning
+        info.setForeground(Color.RED);//set font colour
+        info.setFont(info.getFont().deriveFont(24.0f));//set font size
+        Sales.add(info);
 
     }
 
@@ -374,10 +388,6 @@ public class Interface {
         drugList = new JList(list);
         scrollableList = new JScrollPane(drugList);
         scrollableList.setBackground(Color.decode("#deae8e"));
-        scrollableList.setBackground(Color.decode("#8eabde"));
-
-
-
         branchesList.add(scrollableList);
 
 
@@ -514,18 +524,22 @@ public class Interface {
 
                 String detailsGet = g.returnText();
                 String[] split_details = detailsGet.split("\\s+");
-                String displayedDetails = split_details[0]+" "+split_details[1]+" "+split_details[2]+", "+
-                        "Sell: "+split_details[3]+", Buy: "+split_details[4]+", "+
-                        "Full: "+split_details[5]+", Current: "+split_details[7];
+                String displayedDetails = split_details[0]+" "+split_details[1]+" "+split_details[2]+" "+
+                        "Sell: "+split_details[3]+" Buy: "+split_details[4]+" "+
+                        "Full: "+split_details[5]+" Current: "+split_details[7];
                 //
                 // drugDetails.setText(g.returnText());
                 // System.out.println(jsonString);
-                drugDetails.setText(displayedDetails);
+                //drugDetails.setText(displayedDetails);
+
+                drugDetails.setText(g.returnText());
+
+
             }
         };
         searchButton.addActionListener(searchButtonAL);
 
-        itemDetails = new JLabel("Item Details:");//create title
+        itemDetails = new JLabel("Item Details: (Producer, Name, Quantity, Sell, Buy, Full, Limited, Current)");//create title
         searchForDrug.add(itemDetails);
 
 
