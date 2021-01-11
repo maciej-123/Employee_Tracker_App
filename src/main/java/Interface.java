@@ -308,6 +308,7 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 String quantity = itemQuantity.getText();
                 int int_quan = Integer.parseInt(quantity);
+                int_quan--;
 
                 String manu = sold_ItemManu.getSelectedItem().toString().toLowerCase();
                 String name = sold_ItemName.getSelectedItem().toString().toLowerCase();
@@ -317,13 +318,13 @@ public class Interface {
                 GET_Requests g3 = new GET_Requests("https://phabservlet1.herokuapp.com/getLimitOne");
                 int int_g3 = Integer.valueOf(g3.returnText());
 
+
                 // if more than 1 of a limitOne item is chosen - error
                 if(int_g3==1&&int_quan!=1){
-                    testwarning.setText("INPUT QUANTITY EXCEEDS MAXIMUM");
+                    testwarning.setText("INPUT QUANTITY EXCEEDS MAXIMUM ALLOWED");
                     testwarning.setForeground(Color.RED);
                     System.out.println("Error");
                 }
-
                 // else decrease stock by quantity input
                 else {
                     GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
