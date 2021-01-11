@@ -262,6 +262,7 @@ public class Interface {
                 "Dioralyte","Gaviscon","Senokot","Benadryl","Piriteze","Beconase","Dettol",
                 "Elastoplast","TCP"};
         final JComboBox sold_ItemManu=new JComboBox(soldItemManu);
+        sold_ItemManu.setBackground(Color.decode("#deae8e"));
         sold_ItemManu.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(sold_ItemManu);
         Sales.add(sold_ItemManu);
@@ -285,13 +286,16 @@ public class Interface {
                 "Antiseptic","Hand sanitizer","plasters","Liquid"
         };
         final JComboBox sold_ItemName=new JComboBox(soldItemName);
+        sold_ItemName.setBackground(Color.decode("#deae8e"));
         sold_ItemName.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(sold_ItemName);
         Sales.add(sold_ItemName);
 
         itemQuantity = new JTextField("Input Item Quantity");
+        itemQuantity.setBackground(Color.decode("#eddbce"));
         Sales.add(itemQuantity);
         enterItem = new JButton("Enter Item");
+        enterItem.setBackground(Color.decode("#deae8e"));
         JLabel testwarning = new JLabel();
 
         ActionListener soldItemAL=new ActionListener() {
@@ -369,6 +373,8 @@ public class Interface {
 
         drugList = new JList(list);
         scrollableList = new JScrollPane(drugList);
+        scrollableList.setBackground(Color.decode("#deae8e"));
+        scrollableList.setBackground(Color.decode("#8eabde"));
 
 
 
@@ -376,6 +382,8 @@ public class Interface {
 
 
         restock = new JButton("Restock item(s)");
+        restock.setBackground(Color.decode("#8eabde"));
+
 
         ActionListener restockAL=new ActionListener() {
             @Override
@@ -406,6 +414,7 @@ public class Interface {
         branchesList.add(restock);
 
         checkStock = new JButton("Check stock");
+        checkStock.setBackground(Color.decode("#8eabde"));
         stockStatus = new JTextField("%%Stock status will show here");
         stockStatus.setEditable(false);
         stockStatus.setBackground(Color.LIGHT_GRAY);
@@ -453,6 +462,7 @@ public class Interface {
                 "Elastoplast","TCP"};
         final JComboBox search_drug=new JComboBox(drugSearch);
         search_drug.setEditable(false); // idk if it should be editable
+        search_drug.setBackground(Color.decode("#8edeae"));
         AutoCompletion.enable(search_drug);
         searchForDrug.add(search_drug);
 
@@ -477,12 +487,15 @@ public class Interface {
 
         final JComboBox search_drugname=new JComboBox(drugnameSearch);
         search_drugname.setEditable(false); // idk if it should be editable
+        search_drugname.setBackground(Color.decode("#8edeae"));
         AutoCompletion.enable(search_drugname);
         searchForDrug.add(search_drugname);
 
         // searchForDrug.add(drugName); test
         searchButton = new JButton("Select Item");
         searchForDrug.add(searchButton);
+        searchButton.setBackground(Color.decode("#8edeae"));
+
         ActionListener searchButtonAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -502,8 +515,8 @@ public class Interface {
                 String detailsGet = g.returnText();
                 String[] split_details = detailsGet.split("\\s+");
                 String displayedDetails = split_details[0]+" "+split_details[1]+" "+split_details[2]+", "+
-                        "Selling price: "+split_details[3]+" pounds, Purchase Price: "+split_details[4]+" pounds, "+
-                        "Full stock: "+split_details[5]+", Current stock: "+split_details[7];
+                        "Sell: "+split_details[3]+", Buy: "+split_details[4]+", "+
+                        "Full: "+split_details[5]+", Current: "+split_details[7];
                 //
                 // drugDetails.setText(g.returnText());
                 // System.out.println(jsonString);
