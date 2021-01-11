@@ -381,7 +381,23 @@ public class Interface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Restock button pressed"+e.getActionCommand());
-                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/replenishStock");
+                //GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/replenishStock");
+
+
+                POST_Requests p1 = new POST_Requests("Paddington","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g1 = new GET_Requests("https://phabservlet1.herokuapp.com/delete_phab");
+                POST_Requests p2 = new POST_Requests("MileEnd","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g2 = new GET_Requests("https://phabservlet1.herokuapp.com/delete_phab");
+                POST_Requests p3 = new POST_Requests("GreenPark","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g3 = new GET_Requests("https://phabservlet1.herokuapp.com/delete_phab");
+
+                POST_Requests p4 = new POST_Requests("Paddington","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g4 = new GET_Requests("https://phabservlet1.herokuapp.com/fill_phab");
+                POST_Requests p5 = new POST_Requests("MileEnd","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g5 = new GET_Requests("https://phabservlet1.herokuapp.com/fill_phab");
+                POST_Requests p6 = new POST_Requests("GreenPark","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g6 = new GET_Requests("https://phabservlet1.herokuapp.com/fill_phab");
+
             }
         };
 
