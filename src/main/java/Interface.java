@@ -318,7 +318,7 @@ public class Interface {
                 GET_Requests g3 = new GET_Requests("https://phabservlet1.herokuapp.com/getLimitOne");
                 int int_g3 = Integer.valueOf(g3.returnText());
 
-
+                int_quan++;
                 // if more than 1 of a limitOne item is chosen - error
                 if(int_g3==1&&int_quan!=1){
                     testwarning.setText("INPUT QUANTITY EXCEEDS MAXIMUM ALLOWED");
@@ -327,6 +327,7 @@ public class Interface {
                 }
                 // else decrease stock by quantity input
                 else {
+                    int_quan--;
                     GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
                     for (int i = 0; i < int_quan; i++) {
                         POST_Requests p3 = new POST_Requests(message2, "https://phabservlet1.herokuapp.com/inputMN");
