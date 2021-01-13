@@ -325,7 +325,7 @@ public class Interface {
                     testwarning.setForeground(Color.RED);
                     System.out.println("Error");
                 }
-                // else decrease stock by quantity input
+                // else decrease stock by quantity input//
                 else {
                     int_quan--;
                     GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
