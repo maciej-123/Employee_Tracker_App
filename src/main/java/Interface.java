@@ -149,6 +149,7 @@ public class Interface {
         branches = new JPanel();
         branches.setLayout(new GridLayout(1,3,3,0));
         greenPark = new JButton("Green Park");
+        greenPark.setBackground(Color.decode("#ee0000"));
 
         ActionListener greenParkAL=new ActionListener() {
             @Override
@@ -162,6 +163,7 @@ public class Interface {
         greenPark.addActionListener(greenParkAL);
         branches.add(greenPark);
         mileEnd = new JButton("Mile End");
+        mileEnd.setBackground(Color.decode("#ee0000"));
 
         ActionListener mileEndAL=new ActionListener() {
             @Override
@@ -176,6 +178,7 @@ public class Interface {
 
         branches.add(mileEnd);
         Paddington = new JButton("Paddington");
+        Paddington.setBackground(Color.decode("#ee0000"));
 
         ActionListener paddingtonAL=new ActionListener() {
             @Override
@@ -208,7 +211,9 @@ public class Interface {
         dailyProfit.setBackground(Color.LIGHT_GRAY);
         Profit.add(dailyProfit);
         calculateProfit = new JButton("Calculate Profit");
+        calculateProfit.setBackground(Color.decode("#ade0dd"));
         calculateRevenue = new JButton("Calculate Revenue");
+        calculateRevenue.setBackground(Color.decode("#ade0dd"));
 
         ActionListener profitAL=new ActionListener() {
             @Override
@@ -262,6 +267,7 @@ public class Interface {
                 "Dioralyte","Gaviscon","Senokot","Benadryl","Piriteze","Beconase","Dettol",
                 "Elastoplast","TCP"};
         final JComboBox sold_ItemManu=new JComboBox(soldItemManu);
+        sold_ItemManu.setBackground(Color.decode("#deae8e"));
         sold_ItemManu.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(sold_ItemManu);
         Sales.add(sold_ItemManu);
@@ -285,13 +291,16 @@ public class Interface {
                 "Antiseptic","Hand sanitizer","plasters","Liquid"
         };
         final JComboBox sold_ItemName=new JComboBox(soldItemName);
+        sold_ItemName.setBackground(Color.decode("#deae8e"));
         sold_ItemName.setEditable(false); // idk if it should be editable
         AutoCompletion.enable(sold_ItemName);
         Sales.add(sold_ItemName);
 
         itemQuantity = new JTextField("Input Item Quantity");
+        itemQuantity.setBackground(Color.decode("#eddbce"));
         Sales.add(itemQuantity);
         enterItem = new JButton("Enter Item");
+        enterItem.setBackground(Color.decode("#deae8e"));
         JLabel testwarning = new JLabel();
 
         ActionListener soldItemAL=new ActionListener() {
@@ -299,6 +308,7 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 String quantity = itemQuantity.getText();
                 int int_quan = Integer.parseInt(quantity);
+                int_quan--;
 
                 String manu = sold_ItemManu.getSelectedItem().toString().toLowerCase();
                 String name = sold_ItemName.getSelectedItem().toString().toLowerCase();
@@ -308,15 +318,16 @@ public class Interface {
                 GET_Requests g3 = new GET_Requests("https://phabservlet1.herokuapp.com/getLimitOne");
                 int int_g3 = Integer.valueOf(g3.returnText());
 
+                int_quan++;
                 // if more than 1 of a limitOne item is chosen - error
                 if(int_g3==1&&int_quan!=1){
-                    testwarning.setText("INPUT QUANTITY EXCEEDS MAXIMUM");
+                    testwarning.setText("INPUT QUANTITY EXCEEDS MAXIMUM ALLOWED");
                     testwarning.setForeground(Color.RED);
                     System.out.println("Error");
-                }
-
-                // else decrease stock by quantity input
+                }//
+                // else decrease stock by quantity input//
                 else {
+                    int_quan--;
                     GET_Requests G = new GET_Requests("https://phabservlet1.herokuapp.com/_decreaseStock");
                     for (int i = 0; i < int_quan; i++) {
                         POST_Requests p3 = new POST_Requests(message2, "https://phabservlet1.herokuapp.com/inputMN");
@@ -328,7 +339,10 @@ public class Interface {
                 }
                 Sales.add(testwarning);
 
+
+
             }
+
         };
 
         enterItem.addActionListener(soldItemAL);
@@ -336,6 +350,12 @@ public class Interface {
         Sales.add(enterItem);
 
         functionsPanel.add(Sales);
+
+
+        JLabel info = new JLabel("Please Select Branch Before Use");//create warning
+        info.setForeground(Color.RED);//set font colour
+        info.setFont(info.getFont().deriveFont(24.0f));//set font size
+        Sales.add(info);
 
     }
 
@@ -369,19 +389,35 @@ public class Interface {
 
         drugList = new JList(list);
         scrollableList = new JScrollPane(drugList);
-
-
-
+        scrollableList.setBackground(Color.decode("#deae8e"));
         branchesList.add(scrollableList);
 
 
         restock = new JButton("Restock item(s)");
+        restock.setBackground(Color.decode("#8eabde"));
+
 
         ActionListener restockAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Restock button pressed"+e.getActionCommand());
-                GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/replenishStock");
+                //GET_Requests g = new GET_Requests("https://phabservlet1.herokuapp.com/replenishStock");
+
+
+                POST_Requests p1 = new POST_Requests("Paddington","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g1 = new GET_Requests("https://phabservlet1.herokuapp.com/delete_phab");
+                POST_Requests p2 = new POST_Requests("MileEnd","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g2 = new GET_Requests("https://phabservlet1.herokuapp.com/delete_phab");
+                POST_Requests p3 = new POST_Requests("GreenPark","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g3 = new GET_Requests("https://phabservlet1.herokuapp.com/delete_phab");
+
+                POST_Requests p4 = new POST_Requests("Paddington","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g4 = new GET_Requests("https://phabservlet1.herokuapp.com/fill_phab");
+                POST_Requests p5 = new POST_Requests("MileEnd","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g5 = new GET_Requests("https://phabservlet1.herokuapp.com/fill_phab");
+                POST_Requests p6 = new POST_Requests("GreenPark","https://phabservlet1.herokuapp.com/inputB");
+                GET_Requests g6 = new GET_Requests("https://phabservlet1.herokuapp.com/fill_phab");
+
             }
         };
 
@@ -390,6 +426,7 @@ public class Interface {
         branchesList.add(restock);
 
         checkStock = new JButton("Check stock");
+        checkStock.setBackground(Color.decode("#8eabde"));
         stockStatus = new JTextField("%%Stock status will show here");
         stockStatus.setEditable(false);
         stockStatus.setBackground(Color.LIGHT_GRAY);
@@ -437,6 +474,7 @@ public class Interface {
                 "Elastoplast","TCP"};
         final JComboBox search_drug=new JComboBox(drugSearch);
         search_drug.setEditable(false); // idk if it should be editable
+        search_drug.setBackground(Color.decode("#8edeae"));
         AutoCompletion.enable(search_drug);
         searchForDrug.add(search_drug);
 
@@ -461,12 +499,15 @@ public class Interface {
 
         final JComboBox search_drugname=new JComboBox(drugnameSearch);
         search_drugname.setEditable(false); // idk if it should be editable
+        search_drugname.setBackground(Color.decode("#8edeae"));
         AutoCompletion.enable(search_drugname);
         searchForDrug.add(search_drugname);
 
         // searchForDrug.add(drugName); test
         searchButton = new JButton("Select Item");
         searchForDrug.add(searchButton);
+        searchButton.setBackground(Color.decode("#8edeae"));
+
         ActionListener searchButtonAL=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -485,18 +526,22 @@ public class Interface {
 
                 String detailsGet = g.returnText();
                 String[] split_details = detailsGet.split("\\s+");
-                String displayedDetails = split_details[0]+" "+split_details[1]+" "+split_details[2]+", "+
-                        "Selling price: "+split_details[3]+" pounds, Purchase Price: "+split_details[4]+" pounds, "+
-                        "Full stock: "+split_details[5]+", Current stock: "+split_details[7];
+                String displayedDetails = split_details[0]+" "+split_details[1]+" "+split_details[2]+" "+
+                        "Sell: "+split_details[3]+" Buy: "+split_details[4]+" "+
+                        "Full: "+split_details[5]+" Current: "+split_details[7];
                 //
                 // drugDetails.setText(g.returnText());
                 // System.out.println(jsonString);
-                drugDetails.setText(displayedDetails);
+                //drugDetails.setText(displayedDetails);
+
+                drugDetails.setText(g.returnText());
+
+
             }
         };
         searchButton.addActionListener(searchButtonAL);
 
-        itemDetails = new JLabel("Item Details:");//create title
+        itemDetails = new JLabel("Item Details: (Producer, Name, Quantity, Sell, Buy, Full, Limited, Current)");//create title
         searchForDrug.add(itemDetails);
 
 
