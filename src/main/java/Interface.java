@@ -324,7 +324,7 @@ public class Interface {
                     testwarning.setText("INPUT QUANTITY EXCEEDS MAXIMUM ALLOWED");
                     testwarning.setForeground(Color.RED);
                     System.out.println("Error");
-                }
+                }//
                 // else decrease stock by quantity input//
                 else {
                     int_quan--;
