@@ -12,7 +12,6 @@ public class Main {
         Interface i = new Interface();
         f.add(i.returnMainPanel());
 
-        //test push
 
 
         f.setVisible(true);// This next line closes the program when the frame is close
